@@ -1,6 +1,7 @@
 import express from "express";
 import logger from "morgan";
 import * as bodyParser from "body-parser";
+import mongoose from "mongoose";
 
 const allowed_header: string[] = [
     "http://localhost:4000",
@@ -22,6 +23,10 @@ app.use((req, res, next) => {
     );
     next();
 });
+
+mongoose.connect(
+    process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist"
+);
 
 app.disable("etag");
 require("./routes")(app);

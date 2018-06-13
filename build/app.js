@@ -13,6 +13,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var morgan_1 = __importDefault(require("morgan"));
 var bodyParser = __importStar(require("body-parser"));
+var mongoose_1 = __importDefault(require("mongoose"));
 var allowed_header = [
     "http://localhost:4000",
     "http://localhost:3000",
@@ -29,6 +30,7 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, gutsyJwt, Accept");
     next();
 });
+mongoose_1.default.connect(process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist");
 app.disable("etag");
 require("./routes")(app);
 module.exports = app;
