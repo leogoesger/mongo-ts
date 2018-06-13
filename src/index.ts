@@ -1,6 +1,6 @@
 import * as http from "http";
 import * as dotenv from "dotenv";
-const app = require("./app");
+import app from "./app";
 
 dotenv.config({ path: ".env" });
 

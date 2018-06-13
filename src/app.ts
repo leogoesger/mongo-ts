@@ -1,6 +1,6 @@
 import express from "express";
 import logger from "morgan";
-import * as bodyParser from "body-parser";
+import bodyParser from "body-parser";
 import mongoose from "mongoose";
 
 const allowed_header: string[] = [
@@ -8,7 +8,7 @@ const allowed_header: string[] = [
     "http://localhost:3000",
 ];
 
-const app = express();
+const app: express.Application = express();
 app.use(logger("tiny"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -31,4 +31,4 @@ mongoose.connect(
 app.disable("etag");
 require("./routes")(app);
 
-module.exports = app;
+export default app;

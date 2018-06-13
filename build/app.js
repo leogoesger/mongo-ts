@@ -2,17 +2,10 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var morgan_1 = __importDefault(require("morgan"));
-var bodyParser = __importStar(require("body-parser"));
+var body_parser_1 = __importDefault(require("body-parser"));
 var mongoose_1 = __importDefault(require("mongoose"));
 var allowed_header = [
     "http://localhost:4000",
@@ -20,8 +13,8 @@ var allowed_header = [
 ];
 var app = express_1.default();
 app.use(morgan_1.default("tiny"));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(body_parser_1.default.json());
+app.use(body_parser_1.default.urlencoded({ extended: false }));
 app.use(function (req, res, next) {
     var origin = req.headers.origin;
     if (allowed_header.indexOf(origin) > -1) {
@@ -33,4 +26,4 @@ app.use(function (req, res, next) {
 mongoose_1.default.connect(process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist");
 app.disable("etag");
 require("./routes")(app);
-module.exports = app;
+exports.default = app;
