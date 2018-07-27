@@ -10,6 +10,7 @@
         "start:both": "concurrently \"yarn build\" \"yarn start\"",
         "tslint": "tslint -c tslint.json -p tsconfig.json",
         "seed": "node scripts/seedDB.js"
+
     },
     "dependencies": {
         "body-parser": "^1.18.3",
